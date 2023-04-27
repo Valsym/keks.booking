@@ -11,8 +11,6 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-//console.log('rand=' + getRandomInt(0, 2));
-
 //  Случайное число с плавающей точкой из переданного диапазона включительно.
 const getRandomNumber = (min, max, digit) => {
   let rand = Math.random() * (max - min) + min;
@@ -29,13 +27,8 @@ const getRandomElementsArr = (array) => {
   let arr = [];
   for (let i = 0; i < array.length - 1; i++) {
     let rand = getRandomInt(0, 3);
-    // console.log('rand=' + rand);
-
     arr.push(rand ? array[i] : null);
-    // console.log('array['+i+']=' + array[i]);
   }
-  // arr = arr.filter(el => el);
-  // console.log('arr=' + arr);
   return arr.filter(el => el != null);
 }
 

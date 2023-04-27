@@ -68,8 +68,8 @@ const createBookingObject = () => {
       photos: getRandomElementsArr(photos),
     },
     location: {
-      x: location.x,//getRandomNumber(35.65000, 35.70000, 5),
-      y: location.y,//getRandomNumber(139.70000, 139.80000, 5),
+      x: location.x,
+      y: location.y,
     },
   }
 }
