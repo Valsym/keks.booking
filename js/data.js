@@ -27,21 +27,26 @@ const checkout = checkin;
 
 const description = [
   'Очень дружественное помещение для проживания гостей',
+  'Комфортабельный отель для семей с детьми',
   'Замечательное жилье для наших любимых гостей',
+  'Великолепная квартира-студия в центре Токио. Подходит как туристам, так и бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.',
 ];
 
 const photos = [
-  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel13.jpg',
+  '../img/hotels/hotel1.jpg',
+  '../img/hotels/hotel2.jpg',
+  '../img/hotels/hotel3.jpg',
+  // 'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  // 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  // 'http://o0.github.io/assets/images/tokyo/hotel13.jpg',
 ];
 
 const title = [
-  'Отель1',
-  'Hotel2',
-  'Appartment1',
-  'Appartment2',
-  'Motel1',
+  'Отель в центре Токио',
+  'Отель семейный',
+  'Апартаменты у парка',
+  'Апартаменты в центре Токио',
+  'Уютное гнездышко для молодоженов',
 ];
 
 const createBookingObject = () => {
@@ -52,12 +57,12 @@ const createBookingObject = () => {
 
   return {
     author: {
-      avatar: 'img/avatars/user' + getRandomInt(1, 10) + '.png',
+      avatar: '../img/avatars/user0' + getRandomInt(1, 8) + '.png',
     },
     offer: {
       title: getRandomElementArr(title),
       address: `${location.x}, ${location.y}`,
-      price: getRandomInt(1000, 100000),
+      price: Math.floor(getRandomInt(1000, 100000) / 100) * 100,
       type: getRandomElementArr(offerType),
       rooms: getRandomInt(0, 10),
       guests: getRandomInt(0, 10),

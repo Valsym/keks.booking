@@ -8,7 +8,7 @@ const getRandomInt = (min, max) => {
     [min, max] = [max, min];
   }
 
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.round(Math.random() * (max - min) + min);
 }
 
 //  Случайное число с плавающей точкой из переданного диапазона включительно.
@@ -19,7 +19,9 @@ const getRandomNumber = (min, max, digit) => {
 
 //Случайный элемент массива
 const getRandomElementArr = (array) => {
-  return array[getRandomInt(0, array.length - 1)];
+  let rnd = getRandomInt(0, array.length - 1);
+  //console.log('rnd='+rnd);
+  return array[rnd];
 }
 
 // Массив строк случайной длины из значений массива
@@ -28,8 +30,11 @@ const getRandomElementsArr = (array) => {
   for (let i = 0; i < array.length - 1; i++) {
     let rand = getRandomInt(0, 3);
     arr.push(rand ? array[i] : null);
+    // if (rand) {
+    //   arr.push(array[i]);
+    // }
   }
   return arr.filter(el => el != null);
 }
 
-export {getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr};
+export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr };
