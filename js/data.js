@@ -51,8 +51,8 @@ const title = [
 
 const createBookingObject = () => {
   let location = {
-    x: getRandomNumber(35.65000, 35.70000, 5),
-    y: getRandomNumber(139.70000, 139.80000, 5),
+    x: getRandomNumber(35.65000, 35.70000, 0, 5),
+    y: getRandomNumber(139.70000, 139.80000, 0, 5),
   };
 
   return {

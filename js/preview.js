@@ -1,19 +1,20 @@
 import { addBookingObjects as offers } from './data.js';
+import { offerType } from './utils.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const mapCanvas = document.querySelector('#map-canvas');
-const offerType = (type) => {
-  switch (type) {
-    case 'flat':
-      return 'Квартира';
-    case 'bungalow':
-      return 'Бунгало';
-    case 'house':
-      return 'Дом';
-    case 'palace':
-      return 'Дворец';
-  }
-}
+// const offerType = (type) => {
+//   switch (type) {
+//     case 'flat':
+//       return 'Квартира';
+//     case 'bungalow':
+//       return 'Бунгало';
+//     case 'house':
+//       return 'Дом';
+//     case 'palace':
+//       return 'Дворец';
+//   }
+// }
 const renderOffer = ({offer, author, location}) => {
   let offerPreview = cardTemplate.cloneNode(true);
   offerPreview.querySelector('.popup__title').textContent = offer.title;

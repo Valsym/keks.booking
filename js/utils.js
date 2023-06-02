@@ -12,9 +12,13 @@ const getRandomInt = (min, max) => {
 }
 
 //  Случайное число с плавающей точкой из переданного диапазона включительно.
-const getRandomNumber = (min, max, digit) => {
+const getRandomNumber = (min, max, exp, precision) => {
   let rand = Math.random() * (max - min) + min;
-  return Math.round(rand * 10 ** digit) / (10 ** digit);
+  let result = Math.round(rand * (10 ** exp)) / (10 ** exp);
+  if (precision) {
+    return rand.toFixed(precision);
+  }
+  return result;
 }
 
 //Случайный элемент массива
@@ -37,4 +41,17 @@ const getRandomElementsArr = (array) => {
   return arr.filter(el => el != null);
 }
 
-export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr };
+const offerType = (type) => {
+  switch (type) {
+    case 'flat':
+      return 'Квартира';
+    case 'bungalow':
+      return 'Бунгало';
+    case 'house':
+      return 'Дом';
+    case 'palace':
+      return 'Дворец';
+  }
+}
+
+export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, offerType };

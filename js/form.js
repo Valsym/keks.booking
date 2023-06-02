@@ -12,7 +12,7 @@ const selectTypeHandler = () => {
     //console.log("Changed to: " + selectedType);
     switch (selectedType) {
       case 'flat':
-        timeout.placeholder = 5000;
+        price.placeholder = 5000;
         break;
       case 'bungalow':
         price.placeholder = 1000;
