@@ -40,18 +40,12 @@ const getRandomElementsArr = (array) => {
   }
   return arr.filter(el => el != null);
 }
-
-const offerType = (type) => {
-  switch (type) {
-    case 'flat':
-      return 'Квартира';
-    case 'bungalow':
-      return 'Бунгало';
-    case 'house':
-      return 'Дом';
-    case 'palace':
-      return 'Дворец';
-  }
+const Offer_Type = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  hotel: 'Отель',
+  house: 'Дом',
+  palace: 'Дворец',
 }
 
-export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, offerType };
+export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, Offer_Type };

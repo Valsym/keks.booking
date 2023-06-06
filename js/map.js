@@ -1,17 +1,18 @@
 import { addBookingObjects as offers } from './data.js';
-import { offerType } from './utils.js';
+import { Offer_Type } from './utils.js';
 
-let adForm = document.querySelector('.ad-form');
-let mapFilters = document.querySelector('.map__filters');
-let address = adForm.querySelector('#address');
+const adForm = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const address = adForm.querySelector('#address');
 const mainAdress = { lat: 35.6895, lng: 139.69171 }; // Tokio center
 
-address.value = `lat: ${mainAdress.lat.toFixed(5)}, lng: ${mainAdress.lng.toFixed(5)}`;
-address.addEventListener('focus', (evt) => {
-  evt.target.blur();
-});
+// заменил на атрибут readonly
+// address.value = `lat: ${mainAdress.lat.toFixed(5)}, lng: ${mainAdress.lng.toFixed(5)}`;
+// address.addEventListener('focus', (evt) => {
+//   evt.target.blur();
+// });
 
-let makeMapNotActive = () => {
+const makeMapNotActive = () => {
   adForm.classList.add('ad-form--disabled');
   adForm.querySelectorAll('fieldset').forEach((child) => {
     child.classList.add('disabled');
@@ -26,7 +27,7 @@ let makeMapNotActive = () => {
   });
 }
 
-let makeMapActive = () => {
+const makeMapActive = () => {
   adForm.classList.remove('ad-form--disabled');
   adForm.querySelectorAll('fieldset').forEach((child) => {
     child.classList.remove('disabled');
@@ -71,7 +72,7 @@ const mainPinMarker = L.marker(
   //{ lat: 35.6895, lng: 139.69171 },
   mainAdress,
   { draggable: true, icon: mainPinIcon },
-  { mainPinIcon }
+  { mainPinIcon },
 );
 
 mainPinMarker.addTo(map);
@@ -113,16 +114,16 @@ const createCustomPopup = (point) => {
     feature.classList.add('hidden');
   });
 
-  let popupPhoto
+  const popupPhoto
     = popupElement.querySelector('.popup__photo');
-  let popupPhotos
+  const popupPhotos
     = popupElement.querySelector('.popup__photos');
 
   popupElement.querySelector('img').src = point.avatar;
   popupElement.querySelector('.popup__title').textContent = point.title;
   popupElement.querySelector('.popup__text--address').textContent = `Координаты: ${point.lat}, ${point.lng}`;
   popupElement.querySelector('.popup__text--price').textContent = `${point.price} ₽/ночь`;
-  popupElement.querySelector('.popup__type').textContent = offerType(point.type);
+  popupElement.querySelector('.popup__type').textContent = Offer_Type[point.type];
   popupElement.querySelector('.popup__text--capacity').textContent
     = `${point.rooms} комнаты для ${point.guests} гостей`;
   popupElement.querySelector('.popup__text--time').textContent

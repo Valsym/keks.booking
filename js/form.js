@@ -12,19 +12,22 @@ const selectTypeHandler = () => {
     //console.log("Changed to: " + selectedType);
     switch (selectedType) {
       case 'flat':
-        price.placeholder = 5000;
-        break;
-      case 'bungalow':
         price.placeholder = 1000;
         break;
+      case 'bungalow':
+        price.placeholder = 0;
+        break;
+      case 'hotel':
+        price.placeholder = 3000;
+        break;
       case 'house':
-        price.placeholder = 10000;
+        price.placeholder = 5000;
         break;
       case 'palace':
         price.placeholder = 50000;
         break;
       default:
-        price.placeholder = 5000;
+        price.placeholder = 10000;
     }
   });
 }
