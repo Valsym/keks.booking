@@ -1,3 +1,6 @@
+const ALERT_SHOW_TIME = 5000;
+const MAIN_ADRESS = { lat: 35.6895, lng: 139.69171 }; // Tokio center
+
 // Случайное целое число из переданного диапазона включительно.
 const getRandomInt = (min, max) => {
   if (min < 0 || max < 0) {
@@ -40,7 +43,7 @@ const getRandomElementsArr = (array) => {
   }
   return arr.filter(el => el != null);
 }
-const Offer_Type = {
+const OFFER_TYPE = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   hotel: 'Отель',
@@ -48,4 +51,85 @@ const Offer_Type = {
   palace: 'Дворец',
 }
 
-export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, Offer_Type };
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const successTemplate = document.querySelector('#success').content
+  .querySelector('.success');
+const notice = document.querySelector('main');
+
+const showErrorAlert = (message, button) => {
+  const alertContainer = errorTemplate.cloneNode(true);
+  const errorMessage
+    = alertContainer.querySelector('.error__message')
+  const errorButton
+    = alertContainer.querySelector('.error__button');
+
+  errorMessage.textContent = message;
+  errorButton.textContent = button;
+
+  errorButton.addEventListener('click', (evt) => {
+    alertContainer.remove();
+  });
+
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === ('Escape' || 'Esc')) {
+      alertContainer.remove();
+    }
+  });
+
+  document.addEventListener('click', (evt) => {
+    alertContainer.remove();
+  });
+
+  //notice.appendChild(alertContainer);
+  document.body.append(alertContainer);
+
+  // setTimeout(() => {
+  //   alertContainer.remove();
+  // }, ALERT_SHOW_TIME);
+}
+
+const showSuccessAlert = (message) => {
+  const alertContainer = successTemplate.cloneNode(true);
+  const successMessage
+    = alertContainer.querySelector('.success__message')
+
+  successMessage.textContent = message;
+
+  notice.appendChild(alertContainer);
+
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  //8alertContainer.style.zIndex = 100;
+  alertContainer.style.display = 'block';
+  alertContainer.style.position = 'fixed';//'absolute';//'relative';//
+  alertContainer.style.left = '100px';
+  alertContainer.style.top = '10px';
+  // alertContainer.style.right = 0;
+  alertContainer.style.width = '300px';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '15px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.innerHTML = message;
+
+  document.body.append(alertContainer);
+  //notice.appendChild(alertContainer);
+
+  alertContainer.addEventListener('click', (evt) => {
+    alertContainer.remove();
+  });
+
+  // setTimeout(() => {
+  //   alertContainer.remove();
+  // }, ALERT_SHOW_TIME);
+}
+
+export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, OFFER_TYPE,
+  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADRESS };

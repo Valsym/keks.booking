@@ -1,5 +1,5 @@
 import { addBookingObjects as offers } from './data.js';
-import { Offer_Type } from './utils.js';
+import { OFFER_TYPE } from './utils.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const mapCanvas = document.querySelector('#map-canvas');
@@ -60,7 +60,7 @@ const renderOffers = () => {
   mapCanvas.appendChild(offerListFragment);
 };
 
-// Тестовая отрисовка первого из сгенерированных DOM-элементов
-// renderOffers();
+// Тестовая сгенерированных DOM-элементов
+//renderOffers();
 
 export { renderOffers };

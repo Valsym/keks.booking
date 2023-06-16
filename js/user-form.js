@@ -1,4 +1,5 @@
-import { Offer_Type } from './utils.js';
+import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADRESS } from './utils.js';
+import {sendData} from './api.js';
 
 const MAX_PRICE = 1000000;
 const MIN_PRICE = {
@@ -17,16 +18,59 @@ const price = form.querySelector('#price');
 const timeIn = form.querySelector('#timein');
 const timeOut = form.querySelector('#timeout');
 const timeOutOptions = timeOut.children;
+const timeInOptions = timeIn.children;
 
 const roomNumber = form.querySelector('#room_number');
 const roomNumberOptions = roomNumber.children;
 const capacity = form.querySelector('#capacity');
 const capacityOptions = capacity.children;
 
+const reset = form.querySelector('.ad-form__reset');
+
+const clearOptionSelection = (typeOptions, selectedOption) => {
+  for (let opt of typeOptions) {
+    if (opt.value === selectedOption) {
+      opt.selected = true;
+    } else {
+      opt.selected = false;
+    }
+  }
+}
+
+const clearForm = () => {
+  const avatar = form.querySelector('#avatar');
+  avatar.value = '';
+  const title = form.querySelector('#title');
+  title.placeholder = 'Милая, уютная квартирка в центре Токио';
+  title.value = '';
+
+  clearOptionSelection(typeOptions, 'flat');
+
+  const address = form.querySelector('#address');
+  address.value = `lat:${MAIN_ADRESS.lat}, lng${MAIN_ADRESS.lng}`;
+  price.placeholder = 1000;
+  price.value = '';
+  clearOptionSelection(timeInOptions, '12:00')
+
+  clearOptionSelection(timeOutOptions, '12:00');
+  clearOptionSelection(roomNumberOptions, '1');
+  clearOptionSelection(capacityOptions, '1');
+  const features = form.querySelector('.features');
+  const featureOptions = features.children;
+  for (let feature of featureOptions) {
+    feature.checked = false;
+  }
+  const description = form.querySelector('#description');
+  description.textContent = '';
+  const images = form.querySelector('#images');
+  images.value = '';
+
+}
+
 type.addEventListener('change',  (evt) => {
   const selectedType = evt.target.value;
   const priceValue = price.value;
-  //console.log("Changed to: " + selectedType);
+
   price.placeholder = MIN_PRICE[selectedType];
 
   if (priceValue === '') {
@@ -34,7 +78,7 @@ type.addEventListener('change',  (evt) => {
   }
 
   if (priceValue < MIN_PRICE[selectedType]) {
-    price.setCustomValidity(`Цена за ночь за ${Offer_Type[selectedType]} не менее ${MIN_PRICE[selectedType]}  руб.`);
+    price.setCustomValidity(`Цена за ночь за ${OFFER_TYPE[selectedType]} не менее ${MIN_PRICE[selectedType]}  руб.`);
   }  else {
     price.setCustomValidity('');
   }
@@ -75,12 +119,21 @@ timeIn.addEventListener('change',  (evt) => {
 form.addEventListener('submit', (evt) => {
   const priceValue = price.value;
   const typeOptionSelected = optionSelected(typeOptions);
+  evt.preventDefault();
 
   if (priceValue < MIN_PRICE[typeOptionSelected]) {
-    price.setCustomValidity(`Цена за ночь за ${Offer_Type[typeOptionSelected]} не менее ${MIN_PRICE[typeOptionSelected]} руб.`);
-    evt.preventDefault();
+    price.setCustomValidity(`Цена за ночь за ${OFFER_TYPE[typeOptionSelected]} не менее ${MIN_PRICE[typeOptionSelected]} руб.`);
   } else {
     price.setCustomValidity('');
+
+    sendData(
+      (() => {
+        showSuccessAlert('Успех! Форма отправлена');
+        clearForm();
+      }),
+      (() => showErrorAlert('Не удалось отправить форму. Попробуйте снова.', 'Закрыть')),
+      new FormData(evt.target),
+    );
   }
 
   price.reportValidity();
@@ -93,33 +146,35 @@ price.addEventListener('input', () => {
   if (priceValue > MAX_PRICE) {
     price.setCustomValidity(`Цена за ночь не более ${MAX_PRICE} руб.`);
   } else if (priceValue < MIN_PRICE[typeOptionSelected]) {
-    price.setCustomValidity(`Цена за ночь за ${Offer_Type[typeOptionSelected]} не менее ${MIN_PRICE[typeOptionSelected]} руб.`);
+    price.setCustomValidity(`Цена за ночь за ${OFFER_TYPE[typeOptionSelected]} не менее ${MIN_PRICE[typeOptionSelected]} руб.`);
   } else {
     price.setCustomValidity('');
   }
-
   price.reportValidity();
 });
 
 roomNumber.addEventListener('change',  (evt) => {
   const selectedRoomNumber = evt.target.value;
+  const selectedCapacity = optionSelected(capacityOptions);
 
-  for (let option of capacityOptions) {
-    option.selected = false;
-  }
+  clearOptionSelection(roomNumberOptions, selectedRoomNumber);
 
   switch (selectedRoomNumber) {
     case '1': // 1 комната
-      capacity[2].selected = true; // для 1 гостя
+      clearOptionSelection(capacityOptions, '1'); // для 1 гостя
       break;
     case '2': // 2 комнаты
-      capacity[1].selected = true; //для 2 гостей
+      clearOptionSelection(capacityOptions, '2'); //для 2 гостей
       break;
     case '3': // 3 комнаты
-      capacity[0].selected = true; //для 3 гостей
+      if (optionSelected(capacityOptions) === '2') {
+        clearOptionSelection(capacityOptions, '2'); //для 2 гостей
+      } else {
+        clearOptionSelection(capacityOptions, '3'); //для 3 гостей
+      }
       break;
     case '100': // 100 комнат
-      capacity[3].selected = true; // не для гостей
+      clearOptionSelection(capacityOptions, '0'); // не для гостей
       break;
   }
 });
@@ -161,3 +216,4 @@ capacity.addEventListener('change',  (evt) => {
   capacity.reportValidity();
 });
 
+reset.addEventListener('reset', clearForm());
