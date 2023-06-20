@@ -4,7 +4,9 @@ import { OFFER_TYPE, MAIN_ADRESS } from './utils.js';
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const address = adForm.querySelector('#address');
-const mainAdress = MAIN_ADRESS;//{ lat: 35.6895, lng: 139.69171 }; // Tokio center
+//const mainAdress = MAIN_ADRESS;//{ lat: 35.6895, lng: 139.69171 }; // Tokio center
+
+let markers = [];
 
 // заменил на атрибут readonly
 // address.value = `lat: ${mainAdress.lat.toFixed(5)}, lng: ${mainAdress.lng.toFixed(5)}`;
@@ -45,7 +47,7 @@ const makeMapActive = () => {
 /* global L:readonly */
 let map = L.map('map-canvas')
   .setView(//{ lat: 35.6895, lng: 139.69171 },
-    mainAdress,
+    MAIN_ADRESS,
     11);
 
 if (map) {
@@ -53,6 +55,8 @@ if (map) {
 } else {
   makeMapNotActive();
 }
+
+//L.redraw(map);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -70,7 +74,7 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   //{ lat: 35.6895, lng: 139.69171 },
-  mainAdress,
+  MAIN_ADRESS,
   { draggable: true, icon: mainPinIcon },
   { mainPinIcon },
 );
@@ -86,7 +90,11 @@ mainPinMarker.on('moveend', (evt) => {
 const renderPoints = (data) => {
 
   let points = [];
+
+  //map.getPanes().markerPane.remove();
   //offers().forEach((offer) => {
+  console.log(data);
+  //console.log(opt);
   data.forEach((offer) => {
 
     points.push(
@@ -108,6 +116,7 @@ const renderPoints = (data) => {
       },
     );
   });
+
 
   const createCustomPopup = (point) => {
     const balloonTemplate = document.querySelector('#card').content.
@@ -163,6 +172,22 @@ const renderPoints = (data) => {
     return popupElement;
   };
 
+  //const markerPanes = map.getPanes().markerPane;//.childNodes;
+  if (markers.length < 1) {
+    // console.log(first);
+    // console.log(markers);//markerPanes);
+
+  } else {
+    // console.log(first);
+    // console.log(markers);
+    for(let i= 0; i < markers.length; i++) {
+      //console.log('Удаляю marker['+i+']');
+      map.removeLayer(markers[i]);
+    }
+  }
+
+  markers = [];
+
   points.forEach((point) => {
     const {lat, lng} = point;
 
@@ -182,14 +207,24 @@ const renderPoints = (data) => {
       },
     );
 
-    marker
-      .addTo(map)
-      .bindPopup(
-        createCustomPopup(point),
-        {
-          keepInView: true,
-        },
-      );
+    // marker
+    //   .addTo(map)
+    //   .bindPopup(
+    //     createCustomPopup(point),
+    //     {
+    //       keepInView: true,
+    //     },
+    //   );
+    map.addLayer(marker);
+    marker.bindPopup(
+      createCustomPopup(point),
+      {
+        keepInView: true,
+      },
+    );
+
+    markers.push(marker);
+    //console.log(markers);
   });
 }
 
