@@ -3,7 +3,8 @@
 import {getData} from './api.js';
 import {showErrorAlert, showSuccessAlert, showAlert} from './utils.js';
 import {renderPoints} from './map.js';
-import {setHousingTypeOption, filterData} from './filter.js';
+import {setHousingTypeOption, filterData, setHousingPriceOption, setHousingRoomsOption,
+  setHousingGuestsOption, setHousingFeaturesOptions} from './filter.js';
 
 const OFFERS_NUMBER = 10;
 
@@ -19,6 +20,10 @@ const onSuccess = (data) => {
   // });
   renderPoints(data.slice(0, OFFERS_NUMBER));
   setHousingTypeOption(() => renderPoints(filterData(data)));
+  setHousingPriceOption(() => renderPoints(filterData(data)));
+  setHousingRoomsOption(() => renderPoints(filterData(data)));
+  setHousingGuestsOption(() => renderPoints(filterData(data)));
+  setHousingFeaturesOptions(() => renderPoints(filterData(data)));
   //setHousingTypeOption(()=>data ,() => renderPoints(data));
   //renderPoints(filterData(data));//.slice(0, OFFERS_NUMBER));
   //filterData(() => renderPoints(data));

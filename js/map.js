@@ -91,10 +91,8 @@ const renderPoints = (data) => {
 
   let points = [];
 
-  //map.getPanes().markerPane.remove();
-  //offers().forEach((offer) => {
-  console.log(data);
-  //console.log(opt);
+  //console.log(data);
+
   data.forEach((offer) => {
 
     points.push(
