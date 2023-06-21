@@ -1,4 +1,4 @@
-import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADRESS, optionSelected } from './utils.js';
+import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADDRESS, optionSelected } from './utils.js';
 import {sendData} from './api.js';
 
 const MAX_PRICE = 1000000;
@@ -47,7 +47,7 @@ const clearForm = () => {
   clearOptionSelection(typeOptions, 'flat');
 
   const address = form.querySelector('#address');
-  address.value = `lat:${MAIN_ADRESS.lat}, lng${MAIN_ADRESS.lng}`;
+  address.value = `lat: ${MAIN_ADDRESS.lat}, lng: ${MAIN_ADDRESS.lng}`;
   price.placeholder = 1000;
   price.value = '';
   clearOptionSelection(timeInOptions, '12:00')
@@ -155,7 +155,6 @@ price.addEventListener('input', () => {
 
 roomNumber.addEventListener('change',  (evt) => {
   const selectedRoomNumber = evt.target.value;
-  const selectedCapacity = optionSelected(capacityOptions);
 
   clearOptionSelection(roomNumberOptions, selectedRoomNumber);
 

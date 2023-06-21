@@ -1,18 +1,10 @@
-import { addBookingObjects as offers } from './data.js';
-import { OFFER_TYPE, MAIN_ADRESS } from './utils.js';
+import { OFFER_TYPE, MAIN_ADDRESS } from './utils.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const address = adForm.querySelector('#address');
-//const mainAdress = MAIN_ADRESS;//{ lat: 35.6895, lng: 139.69171 }; // Tokio center
 
 let markers = [];
-
-// заменил на атрибут readonly
-// address.value = `lat: ${mainAdress.lat.toFixed(5)}, lng: ${mainAdress.lng.toFixed(5)}`;
-// address.addEventListener('focus', (evt) => {
-//   evt.target.blur();
-// });
 
 const makeMapNotActive = () => {
   adForm.classList.add('ad-form--disabled');
@@ -46,8 +38,8 @@ const makeMapActive = () => {
 
 /* global L:readonly */
 let map = L.map('map-canvas')
-  .setView(//{ lat: 35.6895, lng: 139.69171 },
-    MAIN_ADRESS,
+  .setView(
+    MAIN_ADDRESS,
     11);
 
 if (map) {
@@ -61,8 +53,8 @@ if (map) {
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      //+' | Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    + ' | Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>',
   },
 ).addTo(map);
 
@@ -73,8 +65,7 @@ const mainPinIcon = L.icon({
 });
 
 const mainPinMarker = L.marker(
-  //{ lat: 35.6895, lng: 139.69171 },
-  MAIN_ADRESS,
+  MAIN_ADDRESS,
   { draggable: true, icon: mainPinIcon },
   { mainPinIcon },
 );
@@ -133,8 +124,7 @@ const renderPoints = (data) => {
 
     popupElement.querySelector('img').src = point.avatar;
     popupElement.querySelector('.popup__title').textContent = point.title;
-    popupElement.querySelector('.popup__text--address').textContent = point.address,
-      //`Координаты: ${point.lat}, ${point.lng}`;
+    popupElement.querySelector('.popup__text--address').textContent = point.address;
     popupElement.querySelector('.popup__text--price').textContent = `${point.price} ₽/ночь`;
     popupElement.querySelector('.popup__type').textContent = OFFER_TYPE[point.type];
     popupElement.querySelector('.popup__text--capacity').textContent

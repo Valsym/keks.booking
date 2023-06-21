@@ -24,11 +24,11 @@ const onSuccess = (data) => {
   ));
 }
 
-const onError = (err) => {
+const onError = () => {
   //showErrorAlert('Ошибка загрузки. Попробуйте еще раз', 'Закрыть');
   showAlert('Ошибка загрузки.<br> Попробуйте еще раз.<br>Кликните здесь, чтобы закрыть.');
-  console.log('Ошибка загрузки.<br> Попробуйте еще раз');
-  console.log(err);
+  // console.log('Ошибка загрузки.<br> Попробуйте еще раз');
+  // console.log(err);
 }
 
 getData(onSuccess, onError);

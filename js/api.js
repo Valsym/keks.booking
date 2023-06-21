@@ -25,14 +25,14 @@ const sendData = (onSuccess, onFail, body) => {
         //alert('11111!');
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз');
-        console.log(response);
-        console.log(body);
+        // console.log(response);
+        // console.log(body);
       }
     })
-    .catch((err) => {
+    .catch(() => {
       onFail('Не удалось отправить форму. Попробуйте ещё раз');
-      alert('cath!');
-      console.log(err);
+      alert('catch!');
+      // console.log(err);
     });
 }
 

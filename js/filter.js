@@ -43,7 +43,7 @@ const filterData = (data) => {
   const housingTypeOptionSelected = optionSelected(housingTypeOptions);
   const housingPriceOptionsSelected = optionSelected(housingPriceOptions);
   const housingRoomOptionsSelected = optionSelected(housingRoomOptions);
-  const housingGuestsOptionstionSelected = optionSelected(housingGuestsOptions);
+  const housingGuestsOptionSelected = optionSelected(housingGuestsOptions);
 
   let res = data.slice();
   //console.log(res);
@@ -66,8 +66,8 @@ const filterData = (data) => {
     res = res.slice().filter(item => item.offer.rooms === Number(housingRoomOptionsSelected));
   }
 
-  if (housingGuestsOptionstionSelected !== 'any') {
-    res = res.slice().filter(item => item.offer.guests === Number(housingGuestsOptionstionSelected));
+  if (housingGuestsOptionSelected !== 'any') {
+    res = res.slice().filter(item => item.offer.guests === Number(housingGuestsOptionSelected));
   }
 
   const featuresCheckedArray = featuresChecked(housingFeaturesOptions);

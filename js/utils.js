@@ -1,5 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
-const MAIN_ADRESS = { lat: 35.6895, lng: 139.69171 }; // Tokio center
+const MAIN_ADDRESS = { lat: 35.6895, lng: 139.69171 }; // Tokio center
 
 // Случайное целое число из переданного диапазона включительно.
 const getRandomInt = (min, max) => {
@@ -63,7 +63,7 @@ const showErrorAlert = (message, button) => {
   errorMessage.textContent = message;
   errorButton.textContent = button;
 
-  errorButton.addEventListener('click', (evt) => {
+  errorButton.addEventListener('click', () => {
     alertContainer.remove();
   });
 
@@ -73,7 +73,7 @@ const showErrorAlert = (message, button) => {
     }
   });
 
-  document.addEventListener('click', (evt) => {
+  document.addEventListener('click', () => {
     alertContainer.remove();
   });
 
@@ -114,7 +114,7 @@ const showAlert = (message) => {
 
   document.body.append(alertContainer);
 
-  alertContainer.addEventListener('click', (evt) => {
+  alertContainer.addEventListener('click', () => {
     alertContainer.remove();
   });
 }
@@ -126,7 +126,7 @@ const optionSelected = (options) => {
     }
   }
   alert('Что-то не то (см. вывод options в Консоль).')
-  console.log(options);
+  //console.log(options);
 }
 
 const debounce = (cb, delay) => {
@@ -144,4 +144,4 @@ const debounce = (cb, delay) => {
 };
 
 export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, OFFER_TYPE,
-  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADRESS, optionSelected, debounce };
+  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADDRESS, optionSelected, debounce };
