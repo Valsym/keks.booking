@@ -37,9 +37,6 @@ const getRandomElementsArr = (array) => {
   for (let i = 0; i < array.length - 1; i++) {
     let rand = getRandomInt(0, 3);
     arr.push(rand ? array[i] : null);
-    // if (rand) {
-    //   arr.push(array[i]);
-    // }
   }
   return arr.filter(el => el != null);
 }
@@ -80,7 +77,6 @@ const showErrorAlert = (message, button) => {
     alertContainer.remove();
   });
 
-  //notice.appendChild(alertContainer);
   document.body.append(alertContainer);
 
   // setTimeout(() => {
@@ -97,7 +93,6 @@ const showSuccessAlert = (message) => {
 
   notice.appendChild(alertContainer);
 
-
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
@@ -105,12 +100,10 @@ const showSuccessAlert = (message) => {
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
-  //8alertContainer.style.zIndex = 100;
   alertContainer.style.display = 'block';
   alertContainer.style.position = 'fixed';//'absolute';//'relative';//
   alertContainer.style.left = '100px';
   alertContainer.style.top = '10px';
-  // alertContainer.style.right = 0;
   alertContainer.style.width = '300px';
   alertContainer.style.padding = '10px 3px';
   alertContainer.style.fontSize = '15px';
@@ -120,16 +113,35 @@ const showAlert = (message) => {
   alertContainer.innerHTML = message;
 
   document.body.append(alertContainer);
-  //notice.appendChild(alertContainer);
 
   alertContainer.addEventListener('click', (evt) => {
     alertContainer.remove();
   });
-
-  // setTimeout(() => {
-  //   alertContainer.remove();
-  // }, ALERT_SHOW_TIME);
 }
 
+const optionSelected = (options) => {
+  for (let opt of options) {
+    if (opt.selected === true) {
+      return opt.value;
+    }
+  }
+  alert('Что-то не то (см. вывод options в Консоль).')
+  console.log(options);
+}
+
+const debounce = (cb, delay) => {
+  // Задержка реализуется с помощью setTimeout
+  // Если вызов произошёл до окончания задержки, таймер начинает отсчёт заново
+  let lastTimeout = null;
+  return function(...args) {
+    if(lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb(...args)
+    }, delay);
+  }
+};
+
 export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, OFFER_TYPE,
-  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADRESS };
+  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADRESS, optionSelected, debounce };

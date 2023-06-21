@@ -1,3 +1,5 @@
+import { optionSelected } from './utils.js';
+
 const OFFERS_NUMBER = 10;
 
 const formMapFilters = document.querySelector('.map__filters');
@@ -11,16 +13,6 @@ const housingGuests = formMapFilters.querySelector('#housing-guests');
 const housingGuestsOptions = housingGuests.children;
 const housingFeatures = formMapFilters.querySelector('#housing-features');
 const housingFeaturesOptions= formMapFilters.querySelectorAll('[name="features"]');
-const optionSelected = (options) => {
-  for (let opt of options) {
-    if (opt.selected === true) {
-      return opt.value;
-    }
-  }
-  alert('Что-то не то (см. вывод options в Консоль).')
-  console.log(options);
-}
-
 const featuresChecked = (items) => {
   const features = [];
   for (let item of items) {

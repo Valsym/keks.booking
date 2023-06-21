@@ -1,4 +1,4 @@
-import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADRESS } from './utils.js';
+import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADRESS, optionSelected } from './utils.js';
 import {sendData} from './api.js';
 
 const MAX_PRICE = 1000000;
@@ -86,15 +86,15 @@ type.addEventListener('change',  (evt) => {
   price.reportValidity();
 });
 
-const optionSelected = (options) => {
-  for (let opt of options) {
-    if (opt.selected === true) {
-      return opt.value;
-    }
-  }
-  alert('Что-то не то (см. вывод options в Консоль).')
-  console.log(options);
-}
+// const optionSelected = (options) => {
+//   for (let opt of options) {
+//     if (opt.selected === true) {
+//       return opt.value;
+//     }
+//   }
+//   alert('Что-то не то (см. вывод options в Консоль).')
+//   console.log(options);
+// }
 
 timeIn.addEventListener('change',  (evt) => {
   const selectedTimeIn = evt.target.value;
