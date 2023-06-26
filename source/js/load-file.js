@@ -18,6 +18,7 @@ const avatarUploadPreview = avatarPreviewContainer.querySelector('img');
 avatarChooser.addEventListener('change', () => {
   const file = avatarChooser.files[0];
   const fileName = file.name.toLowerCase();
+  console.log(fileName);
   const matches = FILE_TYPES.some((it) => {
     return fileName.endsWith(it);
   });
@@ -43,7 +44,6 @@ img.src = 'img/muffin-grey.svg';
 img.alt = 'Превью жилья';
 img.width = Photo.WIDTH;
 img.height = Photo.HEIGHT;
-const filePreview = filePreviewContainer.appendChild(img);
 
 fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
@@ -56,6 +56,7 @@ fileChooser.addEventListener('change', () => {
   if (matches) {
     const reader = new FileReader();
 
+    const filePreview = filePreviewContainer.appendChild(img);
     reader.addEventListener('load', () => {
       filePreview.src = reader.result;
     });
@@ -63,3 +64,5 @@ fileChooser.addEventListener('change', () => {
     reader.readAsDataURL(file);
   }
 });
+
+export { filePreviewContainer }

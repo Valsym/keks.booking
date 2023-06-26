@@ -118,17 +118,6 @@ const showAlert = (message) => {
     alertContainer.remove();
   });
 }
-
-const optionSelected = (options) => {
-  for (let opt of options) {
-    if (opt.selected === true) {
-      return opt.value;
-    }
-  }
-  alert('Что-то не то (см. вывод options в Консоль).')
-  //console.log(options);
-}
-
 const debounce = (cb, delay) => {
   // Задержка реализуется с помощью setTimeout
   // Если вызов произошёл до окончания задержки, таймер начинает отсчёт заново
@@ -144,4 +133,4 @@ const debounce = (cb, delay) => {
 };
 
 export { getRandomInt, getRandomNumber, getRandomElementArr, getRandomElementsArr, OFFER_TYPE,
-  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADDRESS, optionSelected, debounce };
+  showErrorAlert, showSuccessAlert, showAlert, MAIN_ADDRESS, debounce };

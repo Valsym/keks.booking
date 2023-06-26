@@ -1,5 +1,7 @@
-import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADDRESS, optionSelected } from './utils.js';
-import {sendData} from './api.js';
+import { OFFER_TYPE, showErrorAlert, showSuccessAlert, MAIN_ADDRESS } from './utils.js';
+import { sendData } from './api.js';
+import { filePreviewContainer } from './load-file.js';
+
 
 const MAX_PRICE = 1000000;
 const MIN_PRICE = {
@@ -27,6 +29,15 @@ const capacityOptions = capacity.children;
 
 const reset = form.querySelector('.ad-form__reset');
 
+const optionSelected = (options) => {
+  for (let opt of options) {
+    if (opt.selected === true) {
+      return opt.value;
+    }
+  }
+  alert('Что-то не то (см. вывод options в Консоль).')
+  //console.log(options);
+}
 const clearOptionSelection = (typeOptions, selectedOption) => {
   for (let opt of typeOptions) {
     if (opt.value === selectedOption) {
@@ -38,8 +49,8 @@ const clearOptionSelection = (typeOptions, selectedOption) => {
 }
 
 const clearForm = () => {
-  const avatar = form.querySelector('#avatar');
-  avatar.value = '';
+  const avatar = form.querySelector('.ad-form-header__preview > img');
+  avatar.src = 'img/muffin-grey.svg';
   const title = form.querySelector('#title');
   title.placeholder = 'Милая, уютная квартирка в центре Токио';
   title.value = '';
@@ -62,9 +73,8 @@ const clearForm = () => {
   }
   const description = form.querySelector('#description');
   description.textContent = '';
-  const images = form.querySelector('#images');
-  images.value = '';
 
+  filePreviewContainer.querySelectorAll('*').forEach( child => child.remove() );
 }
 
 type.addEventListener('change',  (evt) => {
@@ -85,16 +95,6 @@ type.addEventListener('change',  (evt) => {
 
   price.reportValidity();
 });
-
-// const optionSelected = (options) => {
-//   for (let opt of options) {
-//     if (opt.selected === true) {
-//       return opt.value;
-//     }
-//   }
-//   alert('Что-то не то (см. вывод options в Консоль).')
-//   console.log(options);
-// }
 
 timeIn.addEventListener('change',  (evt) => {
   const selectedTimeIn = evt.target.value;
@@ -157,6 +157,7 @@ roomNumber.addEventListener('change',  (evt) => {
   const selectedRoomNumber = evt.target.value;
 
   clearOptionSelection(roomNumberOptions, selectedRoomNumber);
+  capacity.setCustomValidity('');
 
   switch (selectedRoomNumber) {
     case '1': // 1 комната
@@ -215,4 +216,6 @@ capacity.addEventListener('change',  (evt) => {
   capacity.reportValidity();
 });
 
-reset.addEventListener('reset', clearForm());
+reset.addEventListener('reset', () => clearForm());
+
+export { optionSelected }

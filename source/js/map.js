@@ -36,7 +36,8 @@ const makeMapActive = () => {
   });
 }
 
-/* global L:readonly */
+
+const L = require('leaflet');
 let map = L.map('map-canvas')
   .setView(
     MAIN_ADDRESS,

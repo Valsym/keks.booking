@@ -1,4 +1,4 @@
-import { optionSelected } from './utils.js';
+import { optionSelected } from './user-form.js';
 
 const OFFERS_NUMBER = 10;
 
@@ -81,4 +81,4 @@ const filterData = (data) => {
 }
 
 export { setHousingTypeOption, filterData, setHousingPriceOption, setHousingRoomsOption,
-  setHousingGuestsOption, setHousingFeaturesOptions}
+  setHousingGuestsOption, setHousingFeaturesOptions }
