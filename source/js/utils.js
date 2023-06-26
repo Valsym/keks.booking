@@ -1,5 +1,17 @@
 const ALERT_SHOW_TIME = 5000;
 const MAIN_ADDRESS = { lat: 35.6895, lng: 139.69171 }; // Tokio center
+const OFFER_TYPE = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  hotel: 'Отель',
+  house: 'Дом',
+  palace: 'Дворец',
+}
+
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const successTemplate = document.querySelector('#success').content
+  .querySelector('.success');
+const notice = document.querySelector('main');
 
 // Случайное целое число из переданного диапазона включительно.
 const getRandomInt = (min, max) => {
@@ -40,18 +52,6 @@ const getRandomElementsArr = (array) => {
   }
   return arr.filter(el => el != null);
 }
-const OFFER_TYPE = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  hotel: 'Отель',
-  house: 'Дом',
-  palace: 'Дворец',
-}
-
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const successTemplate = document.querySelector('#success').content
-  .querySelector('.success');
-const notice = document.querySelector('main');
 
 const showErrorAlert = (message, button) => {
   const alertContainer = errorTemplate.cloneNode(true);
@@ -79,9 +79,6 @@ const showErrorAlert = (message, button) => {
 
   document.body.append(alertContainer);
 
-  // setTimeout(() => {
-  //   alertContainer.remove();
-  // }, ALERT_SHOW_TIME);
 }
 
 const showSuccessAlert = (message) => {

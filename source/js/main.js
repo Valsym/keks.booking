@@ -1,6 +1,5 @@
 'use strict'
 
-//import { addBookingObjects } from './data.js';
 import {getData} from './api.js';
 import {showAlert, debounce} from './utils.js';
 import {renderPoints} from './map.js';
@@ -17,17 +16,14 @@ const onSuccess = (data) => {
   setHousingPriceOption(() => renderPoints(filterData(data)));
   setHousingRoomsOption(() => renderPoints(filterData(data)));
   setHousingGuestsOption(() => renderPoints(filterData(data)));
-  //setHousingFeaturesOptions(() => renderPoints(filterData(data)));
   setHousingFeaturesOptions(debounce(
     () => renderPoints(filterData(data)),
     RERENDER_DELAY,
   ));
 }
 
-const onError = () => {
-  //showErrorAlert('Ошибка загрузки. Попробуйте еще раз', 'Закрыть');
+const onError = (/* err */) => {
   showAlert('Ошибка загрузки.<br> Попробуйте еще раз.<br>Кликните здесь, чтобы закрыть.');
-  // console.log('Ошибка загрузки.<br> Попробуйте еще раз');
   // console.log(err);
 }
 

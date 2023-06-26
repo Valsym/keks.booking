@@ -1,5 +1,3 @@
-
-//const
 const getData = (onSuccess, onError) => {
   fetch('https://23.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
@@ -22,14 +20,13 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if(response.ok ) {
         onSuccess();
-        //alert('11111!');
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз');
         // console.log(response);
         // console.log(body);
       }
     })
-    .catch(() => {
+    .catch((/* err */) => {
       onFail('Не удалось отправить форму. Попробуйте ещё раз');
       alert('catch!');
       // console.log(err);

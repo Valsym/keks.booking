@@ -161,14 +161,7 @@ const renderPoints = (data) => {
     return popupElement;
   };
 
-  //const markerPanes = map.getPanes().markerPane;//.childNodes;
-  if (markers.length < 1) {
-    // console.log(first);
-    // console.log(markers);//markerPanes);
-
-  } else {
-    // console.log(first);
-    // console.log(markers);
+  if (markers.length >= 1) {
     for(let i= 0; i < markers.length; i++) {
       //console.log('Удаляю marker['+i+']');
       map.removeLayer(markers[i]);
@@ -196,14 +189,6 @@ const renderPoints = (data) => {
       },
     );
 
-    // marker
-    //   .addTo(map)
-    //   .bindPopup(
-    //     createCustomPopup(point),
-    //     {
-    //       keepInView: true,
-    //     },
-    //   );
     map.addLayer(marker);
     marker.bindPopup(
       createCustomPopup(point),
@@ -213,7 +198,6 @@ const renderPoints = (data) => {
     );
 
     markers.push(marker);
-    //console.log(markers);
   });
 }
 
